@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include partials/head %>
+<body>
+    <% include partials/navbar %>
+    <% if(url.includes('dashboard')) {%>
+      <% include partials/sidenav %>
+    <%}%>
+    <%- messages('messages', locals) %>
+    <% if (typeof errors !== 'undefined') { errors.forEach(function(error){%>
+      <div class="alert alert-danger"><%= error.msg %></div>    
+    <% })} %>
+    <%- body -%>
+    <% include partials/footer %>
+    <% include partials/javascript %>
+</body>
+</html>

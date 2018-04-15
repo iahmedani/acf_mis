@@ -1,6 +1,5 @@
 const settings = require('./config/settings');
 const dbConfig = (process.env.NODE_ENV === 'production' ? settings.cloudConfig : settings.lConfig);
-const express = require("express");
 const sql=require("mssql");
 const config = {
     user: 'sa',
@@ -9,48 +8,68 @@ const config = {
     database: 'demo',
  }
 
+const
+  express = require('express'),
+  mongoose = require('mongoose'),
+//   passport = require('passport'),
+//   passportConf = require('./config/passport'),
+session = require('express-session'),
+  cookieParser = require('cookie-parser'),
+  logger = require('morgan'),
+  ejs = require('ejs'),
+  flash = require('connect-flash'),
+  expressValidator = require('express-validator'),
+  engine = require('ejs-mate');
+
+// express app
 var app = express();
-app.use(express.static(__dirname+"/public"));
+
+// middlewares
+app.use(express.static(__dirname+'/public'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-app.get("/",function(req,resp){
-    resp.send("index.html");
-})
-app.post("/add",function(req,resp){
-var name=req.body.name;
-var fname=req.body.fname;
-var gender=req.body.gender;
-sql.connect(config).then(pool => {
-    // Query
-    
-    return pool.request()
-        .query(`insert into info (Name,Fname,Gender) values ('${name}','${fname}','${gender}')`)
-}).then(result => {
- console.log(result);
- resp.redirect("/") ;
- sql.close();  
-}).catch(err => {
-    // ... error checks
-    console.log(err);
-    sql.close();
-})
-})
-app.get("/showrecord",function(req,resp){
-    sql.connect(config).then(function(pool){
-        return pool.request().query(`select * from info`)
-    }).then(function(result){
-        resp.json(result.recordset);
-        sql.close();
-    }).catch(function(err){
-        console.log(err);
-        sql.close();
-    })
-})
-// app.get("/:name",function(req,resp){
-//     var x=req.params.name;
-//     resp.send("hello "+x)
-// })
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
+app.use(cookieParser());
+app.use(logger('dev'));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: settings.secretKey,
+  // store: new MongoStore({url: localConfig.dbURL, autoReconnect: true, autoRemove: 'native'})
+}));
+app.use(flash());
 
-app.listen(8080,function(){
-    console.log("server started at 8080")
-})
+app.use((req, res, next)=>{
+  app.locals.user = req.user;
+  // app.locals.msg = req.msg || null;
+  app.locals.messages = require('express-messages')(req, res);
+  app.locals.url = req.path;
+  next();
+});
+// Express Validator Middleware
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+  
+      while(namespace.length) {
+        formParam += '[' + namespace.shift() + ']';
+      }
+      return {
+        param : formParam,
+        msg   : msg,
+        value : value
+      };
+    }
+  }));
+
+  // routes
+
+  require('./routes/main')(app);
+
+  app.listen(settings.port, (err)=>{
+    if(err) throw new Error(err);
+    console.log('server started on port :'+settings.port);
+  });
