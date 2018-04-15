@@ -1,0 +1,32 @@
+<% layout('boilerplate') %>
+    <div class="container">
+        <a class="btn" id="addDistrict">Add District</a>
+        <a class="btn" id="addTehsil">Add Tehsil</a>
+        <a class="btn" id="addUC">Add UC</a>
+        <form action="/dashboard/geoinfo" method="post" id="geoform">
+            <div class="input-fields">
+                <select name="province">
+                    <option value="" selected>Select Province</option>
+                    <% provinces.forEach(function(province) {%>
+                        <option value="<%= province.province_id %>">
+                            <%= province.province_name %>
+                        </option>
+                        <%})%>
+                </select>
+                <label for="province">Province</label>
+            </div>
+        </form>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+        $('#addDistrict').on('click', function(e){
+            var html = `<div class="input-fields">
+                <input type="text" name="district">
+                <label for="province">District</label>
+            </div>`
+            $('#geoform').append(html);
+            e.preventDefault();
+        })
+    });    
+    </script>

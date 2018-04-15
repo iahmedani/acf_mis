@@ -68,6 +68,7 @@ app.use(expressValidator({
   // routes
 
   require('./routes/main')(app);
+  require('./routes/admin')(app);
 
   app.listen(settings.port, (err)=>{
     if(err) throw new Error(err);
