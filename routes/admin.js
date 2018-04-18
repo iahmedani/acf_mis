@@ -1,22 +1,23 @@
-const sql = require('mssql');
-const config = {
-    user: 'sa',
-    password: 'smartest1',
-    server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
-    database: 'ACF MIS',
- };
-
-module.exports = function(app){
-    app.get('/dashboard/geoinfo', function(req, resp){
-        sql.connect(config).then(function(pool){
-            return pool.request()
-                        .query('Select * from geo_province')
-        }).then(function(result){
-            resp.render('admin/geoinformation', {provinces: result.recordset});
-            sql.close();            
-        }).catch(function(err){
-            console.log(err);
-            sql.close();
+var db = require('../config/apidb');
+module.exports = function (app) {
+    app.get('/dashboard/geoinfo', function (req, resp) {
+        db.executeSql('Select * from geo_province', function (result, err) {
+            if (err) return req.flash('danger', err);
+            resp.render('admin/geoinformation', {
+                provinces: result,
+                districts: null
+            });
         })
+    });
+    app.post('/dashboard/getDistrict', function (req, resp) {
+        var province_id = req.body.province;
+        console.log(province_id);
+        var getDistQry = `Select * from geo_district WHERE province_ID = ${province_id}`;
+        db.getData(getDistQry, function (result, err) {
+            if (err) return resp.json({
+                'msg': err
+            });
+            resp.json(result);
+        });
     });
 }

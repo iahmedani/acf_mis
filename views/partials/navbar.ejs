@@ -1,6 +1,8 @@
 <div class="navbar-fixed">
   <nav class="white ">
+    <% if (!url.includes('dashboard')){%>
     <div class="container">
+    <% } %>    
       <div class="nav-wrapper">
         <a href="/" class="brand-logo"><img class="acf-logo" src="/img/acf-logo.svg"></a>
         <a href="#" data-activates="mobile-nav" class="button-collapse grey-text text-darken-3">
@@ -18,17 +20,20 @@
           </li>
         </ul>
       </div>
-    </div>
+      <% if (!url.includes('dashboard')){%>
+      </div>
+      <% } %>
   </nav>
+  <ul class="side-nav" id="mobile-nav">
+      <li>
+          <a href="/" class="grey-text text-darken-3">Home</a>
+        </li>
+        <li>
+          <a href="/dashboard" class="grey-text text-darken-3">Dashboard</a>
+        </li>
+        <li>
+          <a href="/contact" class="grey-text text-darken-3">Contact</a>
+        </li>
+  </ul>
 </div>
-<ul class="side-nav" id="mobile-nav">
-    <li>
-        <a href="/" class="grey-text text-darken-3">Home</a>
-      </li>
-      <li>
-        <a href="/dashboard" class="grey-text text-darken-3">Dashboard</a>
-      </li>
-      <li>
-        <a href="/contact" class="grey-text text-darken-3">Contact</a>
-      </li>
-</ul>
+

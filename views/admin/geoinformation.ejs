@@ -1,32 +1,23 @@
 <% layout('boilerplate') %>
-    <div class="container">
-        <a class="btn" id="addDistrict">Add District</a>
-        <a class="btn" id="addTehsil">Add Tehsil</a>
-        <a class="btn" id="addUC">Add UC</a>
-        <form action="/dashboard/geoinfo" method="post" id="geoform">
-            <div class="input-fields">
-                <select name="province">
+<div class="container">
+    <button class="btn" id="addDistrict">Add District</button>
+    <button class="btn" id="addTehsil">Add Tehsil</button>
+    <button class="btn" id="addUC">Add UC</button>
+    <form action="/dashboard/geoinfo" method="post" id="geoform">
+        <div class="row" id="dataFields">
+            <div class="input-fields col l3">
+                <select name="province" required>
                     <option value="" selected>Select Province</option>
                     <% provinces.forEach(function(province) {%>
-                        <option value="<%= province.province_id %>">
-                            <%= province.province_name %>
+                        <option value="<%= province.province_ID %>">
+                            <%= province.province_Name %>
                         </option>
                         <%})%>
                 </select>
                 <label for="province">Province</label>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
 
-    <script>
-    $(document).ready(function(){
-        $('#addDistrict').on('click', function(e){
-            var html = `<div class="input-fields">
-                <input type="text" name="district">
-                <label for="province">District</label>
-            </div>`
-            $('#geoform').append(html);
-            e.preventDefault();
-        })
-    });    
-    </script>
+<script src="/js/geo.js"></script>

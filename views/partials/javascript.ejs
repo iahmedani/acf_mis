@@ -1,31 +1,17 @@
 <!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/js/materialize.min.js"></script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script> -->
 <script>
   $(document).ready(function () {
     // Init Side nav
     $('.button-collapse').sideNav();
-
+    // $('.sidenav').sidenav();
     // Init Slider
     $('.slider').slider({
       indicators: false,
       height: 500,
       transition: 500,
       interval: 4000
-    });
-
-    // Autocomplete
-    $('.autocomplete').autocomplete({
-      data: {
-        "Aruba": null,
-        "Cancun Mexico": null,
-        "Hawaii": null,
-        "Florida": null,
-        "California": null,
-        "Jamaica": null,
-        "Europe": null,
-        "The Bahamas": null,
-      }
     });
     $('.collapsible').collapsible({
       accordion: false, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
