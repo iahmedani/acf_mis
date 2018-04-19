@@ -1,15 +1,15 @@
 const sql = require('mssql'),
   apiConfig = {
-    user: 'apiv1',
-    password: 'imran123',
+    user: 'sa',
+    password: '7Cd29FhP2YQU4FtP',
     database: 'ACF MIS',
-    server: '10.11.71.37'
+    server: '45.76.90.167'
   }
   dbConfig = {
     user: 'sa',
-    password: 'imran123',
+    password: '7Cd29FhP2YQU4FtP',
     database: 'ACF MIS',
-    server: '10.11.71.37'
+    server: '45.76.90.167'
   }
 // exports.close = sql.close();
 exports.getData = function (query, callback) {

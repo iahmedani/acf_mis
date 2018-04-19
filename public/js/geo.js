@@ -8,7 +8,7 @@ function getDistrict(val) {
     dataType: 'JSON',
     success: function (districts) {
       if(districts.length > 0){
-        var html = '<option value="" disabled>Select District</option>\n';
+        var html = '<option selected>Select District</option>\n';
         districts.forEach(district => {
           console.log(district);
           html+=`<option value="${district.district_ID}">${district.district_Name.toUpperCase()}</option>\n`;
@@ -97,6 +97,8 @@ function addDist (){
       success:function(data){
         Materialize.toast(data.msg, 3000);
           console.log(data);
+          $('#frmAddDist').trigger("reset");
+        $('select').material_select();
       }
   });
 }
@@ -109,6 +111,8 @@ function addTeh (){
       success:function(data){
         Materialize.toast(data.msg, 3000);
           console.log(data);
+          $('#frmAddTehsil').trigger("reset");
+          $('select').material_select();
       }
   });
 }
@@ -121,6 +125,9 @@ function addUC (){
       success:function(data){
         Materialize.toast(data.msg, 3000);
           console.log(data);
+          $('#frmAddUC').trigger("reset");
+          $('select').material_select(); 
+
       }
   });
 }
