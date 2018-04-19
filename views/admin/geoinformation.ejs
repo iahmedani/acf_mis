@@ -1,11 +1,19 @@
 <% layout('boilerplate') %>
+<script src="/js/geo.js"></script>
 <div class="container">
-    <button class="btn" id="addDistrict">Add District</button>
-    <button class="btn" id="addTehsil">Add Tehsil</button>
-    <button class="btn" id="addUC">Add UC</button>
+    <div class="fixed-action-btn">
+            <a class="btn-floating btn-large green">
+              <i class="large material-icons">add</i>
+            </a>
+            <ul>
+              <li><a class="btn-floating green modal-trigger" href="#distModal">Dist</a></li>
+              <li><a class="btn-floating green modal-trigger" href="#tehsilModal">Teh</a></li>
+              <li><a class="btn-floating green modal-trigger" href="#ucModal">UC</a></li>
+            </ul>
+          </div>
     <form action="/dashboard/geoinfo" method="post" id="geoform">
         <div class="row" id="dataFields">
-            <div class="input-fields col l3">
+            <div class="input-field col l3">
                 <select name="province" required>
                     <option value="" selected>Select Province</option>
                     <% provinces.forEach(function(province) {%>
@@ -18,6 +26,129 @@
             </div>
         </div>
     </form>
+  
+  <!-- Modal Structure -->
+  <div id="distModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Add District</h4>
+      <form action="/dashboard/addDistrict" method="POST" id="frmAddDist">
+        <div class="row">
+            <div class="input-field col s6">
+                <select name="province" required onchange="getDistrict(this.value)">
+                    <option value="" disabled>Select Province</option>
+                    <% provinces.forEach(function(province) {%>
+                        <option value="<%= province.province_ID %>">
+                            <%= province.province_Name %>
+                        </option>
+                        <%})%>
+                </select>
+                <label for="province">Province</label>
+            </div>
+            <div class="input-field col s6">
+                <select name="listDistrict" id="listDistrict">
+                    <option value="" disabled>Select District</option>
+                </select>
+                <label for="listDistrict">Available Districts</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" name="district">
+                <label for="district">Add New District</label>
+            </div>
+        </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action waves-effect waves-green btn-flat" onclick="addDist()">Submit</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+</div>
+  <div id="tehsilModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Add Tehsil</h4>
+      <form action="/dashboard/addDistrict" method="POST" id="frmAddTehsil">
+        <div class="row">
+            <div class="input-field col s6">
+                <select name="province" required onchange="getDistrictForTehsil(this.value)">
+                    <option value="" disabled>Select Province</option>
+                    <% provinces.forEach(function(province) {%>
+                        <option value="<%= province.province_ID %>">
+                            <%= province.province_Name%>
+                        </option>
+                        <%})%>
+                </select>
+                <label for="province">Province</label>
+            </div>
+            <div class="input-field col s6">
+                <select name="listDistrict" id="listDistrictTehsil" onchange="getTehsil(this.value)">
+                    <option value="" disabled>Select District</option>
+                </select>
+                <label for="listDistrict">Available Districts</label>
+            </div>
+            <div class="input-field col s6">
+                <select name="listTehsil" id="listTehsil">
+                    <option value="" disabled>Select Tehsil</option>
+                </select>
+                <label for="listTehsil">Available Tesils</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" name="tehsil">
+                <label for="tehsil">Add New Tehsil</label>
+            </div>
+        </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action waves-effect waves-green btn-flat" onclick="addTeh()">Submit</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+</div>
+  <div id="ucModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Add UC</h4>
+      <form action="/dashboard/addDistrict" method="POST" id="frmAddUC">
+        <div class="row">
+            <div class="input-field col s6">
+                <select name="province" required onchange="getDistrictForUC(this.value)">
+                    <option value="" disabled>Select Province</option>
+                    <% provinces.forEach(function(province) {%>
+                        <option value="<%= province.province_ID %>">
+                            <%= province.province_Name %>
+                        </option>
+                        <%})%>
+                </select>
+                <label for="province">Province</label>
+            </div>
+            <div class="input-field col s6">
+                <select name="listDistrict" id="listDistrictUC" onchange="getTehsilForUC(this.value)">
+                    <option value="" disabled>Select District</option>
+                </select>
+                <label for="listDistrict">Available Districts</label>
+            </div>
+            <div class="input-field col s6">
+                <select name="listTehsil" id="listTehsilUC" onchange="getUC(this.value)">
+                    <option value="" disabled>Select Tehsil</option>
+                </select>
+                <label for="listTehsil">Available Tesils</label>
+            </div>
+            <div class="input-field col s6">
+                <select name="listUC" id="listUC">
+                    <option value="" disabled>Select UC</option>
+                </select>
+                <label for="listUC">Available UCs</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" name="uc">
+                <label for="uc">Add New UC</label>
+            </div>
+        </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action waves-effect waves-green btn-flat" onclick="addUC()">Submit</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
 </div>
 
-<script src="/js/geo.js"></script>

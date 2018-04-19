@@ -1,39 +1,219 @@
-$(document).ready(function () {
-
-  function addDistrict(val) {
-    $.ajax({
-      url: '/dashboard/getDistrict',
-      method: 'POST',
-      data: {
-        'province': val
-      },
-      dataType: 'JSON',
-      success: function (districts) {
-        if (districts.length > 0) {
-          $('#district_list').remove();
-          var list = `<div class="input-fields" id="district_list"><select name="listDisricts"><option value=" " selected>District:</option>`;
-          districts.forEach(function (district) {
-            list += `<option value="${district.district_ID}">${district.district_Name}</option>`;
-          })
-          list += `</select><label for="listDistricts">Districts</label></div>`;
-
-          $('#dataFields').append(list);
-          console.log(list);
-        }
-        var newDistrict = '<div class="input-fields"><input type="text name="district"><label for="District">District</label></div>';
-        $('input[name=district]').remove();
-        $('#dataFields').append(newDistrict);
+function getDistrict(val) {
+  $.ajax({
+    url: '/dashboard/getDistrict',
+    method: 'POST',
+    data: {
+      'province': val
+    },
+    dataType: 'JSON',
+    success: function (districts) {
+      if(districts.length > 0){
+        var html = '<option value="" disabled>Select District</option>\n';
+        districts.forEach(district => {
+          console.log(district);
+          html+=`<option value="${district.district_ID}">${district.district_Name.toUpperCase()}</option>\n`;
+        });
+        $('#listDistrict').find('option').remove();
+        $('#listDistrict').append(html);
+        $('select').material_select();
+        console.log(html);
+      } else {
+        $('#listDistrict').find('option').remove();
+        $('select').material_select();
+        Materialize.toast('No district in this province', 4000)
       }
-    });
-  };
 
-  $('#addDistrict').on('click', function (e) {
-    var province = $('select[name=province]').val();
-    if (province) {
-      addDistrict(province);
-    } else {
-      alert('Please select province')
     }
-    e.preventDefault();
-  })
+  });
+};
+
+function getDistrictForTehsil(val) {
+  $.ajax({
+    url: '/dashboard/getDistrict',
+    method: 'POST',
+    data: {
+      'province': val
+    },
+    dataType: 'JSON',
+    success: function (districts) {
+      if(districts.length > 0){
+        var html = '<option value="" disabled>Select District</option>\n';
+        districts.forEach(district => {
+          console.log(district);
+          html+=`<option value="${district.district_ID}">${district.district_Name.toUpperCase()}</option>\n`;
+        });
+        $('#listDistrictTehsil').find('option').remove();
+        $('#listDistrictTehsil').append(html);
+        $('select').material_select();
+        console.log(html);
+      } else {
+        $('#listDistrictTehsil').find('option').remove();
+        $('select').material_select();
+        Materialize.toast('No district in this province', 4000)
+      }
+
+    }
+  });
+};
+
+function getDistrictForUC(val) {
+  $.ajax({
+    url: '/dashboard/getDistrict',
+    method: 'POST',
+    data: {
+      'province': val
+    },
+    dataType: 'JSON',
+    success: function (districts) {
+      if(districts.length > 0){
+        var html = '<option value="" disabled>Select District</option>\n';
+        districts.forEach(district => {
+          console.log(district);
+          html+=`<option value="${district.district_ID}">${district.district_Name.toUpperCase()}</option>\n`;
+        });
+        $('#listDistrictUC').find('option').remove();
+        $('#listDistrictUC').append(html);
+        $('select').material_select();
+        console.log(html);
+      } else {
+        $('#listDistrictUC').find('option').remove();
+        $('select').material_select();
+        Materialize.toast('No district in this province', 4000)
+      }
+
+    }
+  });
+};
+
+
+
+
+
+function addDist (){
+  $.ajax({
+      url:'/dashboard/addDistrict',
+      type:'post',
+      data:$('#frmAddDist').serialize(),
+      success:function(data){
+        Materialize.toast(data.msg, 3000);
+          console.log(data);
+      }
+  });
+}
+
+function addTeh (){
+  $.ajax({
+      url:'/dashboard/addTehsil',
+      type:'post',
+      data:$('#frmAddTehsil').serialize(),
+      success:function(data){
+        Materialize.toast(data.msg, 3000);
+          console.log(data);
+      }
+  });
+}
+
+function addUC (){
+  $.ajax({
+      url:'/dashboard/addUC',
+      type:'post',
+      data:$('#frmAddUC').serialize(),
+      success:function(data){
+        Materialize.toast(data.msg, 3000);
+          console.log(data);
+      }
+  });
+}
+
+function getTehsil(val) {
+  $.ajax({
+    url: '/dashboard/getTehsil',
+    method: 'POST',
+    data: {
+      'district': val
+    },
+    dataType: 'JSON',
+    success: function (tehsils) {
+      if(tehsils.length > 0){
+        var html = '<option value="" disabled>Select Tehsil</option>\n';
+        tehsils.forEach(tehsil => {
+          console.log(tehsil);
+          html+=`<option value="${tehsil.tehsil_id}">${tehsil.tehsil_Name.toUpperCase()}</option>\n`;
+        });
+        $('#listTehsil').find('option').remove();
+        $('#listTehsil').append(html);
+        $('select').material_select();
+        console.log(html);
+      } else {
+        $('#listTehsil').find('option').remove();
+        $('select').material_select();
+        Materialize.toast('No Tehsil in this district', 4000)
+      }
+
+    }
+  });
+};
+
+function getTehsilForUC(val) {
+  $.ajax({
+    url: '/dashboard/getTehsil',
+    method: 'POST',
+    data: {
+      'district': val
+    },
+    dataType: 'JSON',
+    success: function (tehsils) {
+      if(tehsils.length > 0){
+        var html = '<option value="" disabled>Select Tehsil</option>\n';
+        tehsils.forEach(tehsil => {
+          console.log(tehsil);
+          html+=`<option value="${tehsil.tehsil_id}">${tehsil.tehsil_Name.toUpperCase()}</option>\n`;
+        });
+        $('#listTehsilUC').find('option').remove();
+        $('#listTehsilUC').append(html);
+        $('select').material_select();
+        console.log(html);
+      } else {
+        $('#listTehsilUC').find('option').remove();
+        $('select').material_select();
+        Materialize.toast('No Tehsil in this district', 4000)
+      }
+
+    }
+  });
+};
+
+function getUC(val) {
+  $.ajax({
+    url: '/dashboard/getUC',
+    method: 'POST',
+    data: {
+      'tehsil': val
+    },
+    dataType: 'JSON',
+    success: function (ucs) {
+      if(ucs.length > 0){
+        var html = '<option value="" disabled>Select Tehsil</option>\n';
+        ucs.forEach(uc => {
+          console.log(uc);
+          html+=`<option value="${uc.uc_id}">${uc.uc_Name.toUpperCase()}</option>\n`;
+        });
+        $('#listUC').find('option').remove();
+        $('#listUC').append(html);
+        $('select').material_select();
+        console.log(html);
+      } else {
+        $('#listUC').find('option').remove();
+        $('select').material_select();
+        Materialize.toast('No UC in this Tehsil', 4000)
+      }
+
+    }
+  });
+};
+
+
+$(document).ready(function () {
+  $('.modal').modal();
+
 })

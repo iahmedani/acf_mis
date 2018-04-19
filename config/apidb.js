@@ -11,7 +11,7 @@ const sql = require('mssql'),
     database: 'ACF MIS',
     server: '10.11.71.37'
   }
-
+// exports.close = sql.close();
 exports.getData = function (query, callback) {
   sql.connect(apiConfig)
     .then(function (pool) {
@@ -36,6 +36,22 @@ exports.executeSql = function (query, callback) {
     })
     .then(function (result) {
       callback(result.recordset);
+      sql.close();
+    })
+    .catch(function (err) {
+      callback(null, err);
+      sql.close();
+    })
+}
+
+exports.executeSqlInsert = function (query, callback) {
+  sql.connect(dbConfig)
+    .then(function (pool) {
+      return pool.request()
+        .query(query)
+    })
+    .then(function (result) {
+      callback(result);
       sql.close();
     })
     .catch(function (err) {
