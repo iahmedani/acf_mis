@@ -6,7 +6,7 @@
             <div class="row" id="dataFields">
                 <div class="input-field col l3">
                     <select name="province" required>
-                        <option value="" selected>Select Province</option>
+                        <option >Select Province</option>
                         <% provinces.forEach(function(province) {%>
                             <option value="<%= province.province_ID %>">
                                 <%= province.province_Name %>
@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <select name="province" required onchange="getDistrictForTehsil(this.value)">
-                            <option value="" disabled>Select Province</option>
+                            <option >Select Province</option>
                             <% provinces.forEach(function(province) {%>
                                 <option value="<%= province.province_ID %>">
                                     <%= province.province_Name%>
@@ -74,13 +74,13 @@
                     </div>
                     <div class="input-field col s6">
                         <select name="listDistrict" id="listDistrictTehsil" onchange="getTehsil(this.value)">
-                            <option value="" disabled>Select District</option>
+                            <option>Select District</option>
                         </select>
                         <label for="listDistrict">Available Districts</label>
                     </div>
                     <div class="input-field col s6">
                         <select name="listTehsil" id="listTehsil">
-                            <option value="" disabled>Select Tehsil</option>
+                            <option >Select Tehsil</option>
                         </select>
                         <label for="listTehsil">Available Tesils</label>
                     </div>
@@ -104,7 +104,7 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <select name="province" required onchange="getDistrictForUC(this.value)">
-                            <option value="" disabled>Select Province</option>
+                            <option>Select Province</option>
                             <% provinces.forEach(function(province) {%>
                                 <option value="<%= province.province_ID %>">
                                     <%= province.province_Name %>
@@ -115,13 +115,13 @@
                     </div>
                     <div class="input-field col s6">
                         <select name="listDistrict" id="listDistrictUC" onchange="getTehsilForUC(this.value)">
-                            <option value="" disabled>Select District</option>
+                            <option >Select District</option>
                         </select>
                         <label for="listDistrict">Available Districts</label>
                     </div>
                     <div class="input-field col s6">
                         <select name="listTehsil" id="listTehsilUC" onchange="getUC(this.value)">
-                            <option value="" disabled>Select Tehsil</option>
+                            <option >Select Tehsil</option>
                         </select>
                         <label for="listTehsil">Available Tesils</label>
                     </div>

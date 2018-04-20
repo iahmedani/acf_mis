@@ -37,7 +37,7 @@ function getDistrictForTehsil(val) {
     dataType: 'JSON',
     success: function (districts) {
       if(districts.length > 0){
-        var html = '<option value="" disabled>Select District</option>\n';
+        var html = '<option >Select District</option>\n';
         districts.forEach(district => {
           console.log(district);
           html+=`<option value="${district.district_ID}">${district.district_Name.toUpperCase()}</option>\n`;
@@ -66,7 +66,7 @@ function getDistrictForUC(val) {
     dataType: 'JSON',
     success: function (districts) {
       if(districts.length > 0){
-        var html = '<option value="" disabled>Select District</option>\n';
+        var html = '<option >Select District</option>\n';
         districts.forEach(district => {
           console.log(district);
           html+=`<option value="${district.district_ID}">${district.district_Name.toUpperCase()}</option>\n`;
@@ -142,7 +142,7 @@ function getTehsil(val) {
     dataType: 'JSON',
     success: function (tehsils) {
       if(tehsils.length > 0){
-        var html = '<option value="" disabled>Select Tehsil</option>\n';
+        var html = '<option >Select Tehsil</option>\n';
         tehsils.forEach(tehsil => {
           console.log(tehsil);
           html+=`<option value="${tehsil.tehsil_id}">${tehsil.tehsil_Name.toUpperCase()}</option>\n`;
@@ -171,7 +171,7 @@ function getTehsilForUC(val) {
     dataType: 'JSON',
     success: function (tehsils) {
       if(tehsils.length > 0){
-        var html = '<option value="" disabled>Select Tehsil</option>\n';
+        var html = '<option >Select Tehsil</option>\n';
         tehsils.forEach(tehsil => {
           console.log(tehsil);
           html+=`<option value="${tehsil.tehsil_id}">${tehsil.tehsil_Name.toUpperCase()}</option>\n`;
@@ -200,7 +200,7 @@ function getUC(val) {
     dataType: 'JSON',
     success: function (ucs) {
       if(ucs.length > 0){
-        var html = '<option value="" disabled>Select Tehsil</option>\n';
+        var html = '<option >Select Tehsil</option>\n';
         ucs.forEach(uc => {
           console.log(uc);
           html+=`<option value="${uc.uc_id}">${uc.uc_Name.toUpperCase()}</option>\n`;
