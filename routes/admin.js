@@ -88,4 +88,8 @@ module.exports = function (app) {
             }
         })
     });
+    app.route('/dashboard/cmam')
+        .get(function(req, resp){
+            resp.render('dataentry/cmam');
+        })
 }

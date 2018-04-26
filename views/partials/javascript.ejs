@@ -4,7 +4,7 @@
 <script>
   $(document).ready(function () {
     // Init Side nav
-    $('.button-collapse').sideNav();
+    $('.sidenav').sidenav();
     // $('.sidenav').sidenav();
     // Init Slider
     $('.slider').slider({
@@ -17,7 +17,13 @@
       accordion: false, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
       // ction(el) { alert('Closed'); } // Callback for Collapsible close
     });
-    $('select').material_select();
+    $('select').formSelect();
+    $('#mobile-nav').sidenav({
+      edge:'right'
+    })
+    $('.tabs').tabs({
+      // swipeable: true
+    });
 
   });
 </script>

@@ -1,0 +1,32 @@
+table {
+  border-collapse: collapse;
+}
+table, td, td {
+ border: 1px solid grey;
+}
+tr td {
+ padding: 0;
+ margin: 0;
+}
+input {
+
+border: 1px solid grey !important;
+padding-bottom: 0;
+margin-bottom: 0!important;
+}
+
+.section .row {
+  margin-bottom: 5px;
+}
+
+.section .row input {
+  height: 2rem;
+}
+.section .row p {
+  font-size: 10px;
+  font-weight: bold;
+}
+.section .row select {
+  font-size: 10px;
+  font-weight: bold;
+}

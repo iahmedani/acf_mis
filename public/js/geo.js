@@ -15,11 +15,11 @@ function getDistrict(val) {
         });
         $('#listDistrict').find('option').remove();
         $('#listDistrict').append(html);
-        $('select').material_select();
+        $('select').formSelect();
         console.log(html);
       } else {
         $('#listDistrict').find('option').remove();
-        $('select').material_select();
+        $('select').formSelect();
         Materialize.toast('No district in this province', 4000)
       }
 
@@ -44,11 +44,11 @@ function getDistrictForTehsil(val) {
         });
         $('#listDistrictTehsil').find('option').remove();
         $('#listDistrictTehsil').append(html);
-        $('select').material_select();
+        $('select').formSelect();
         console.log(html);
       } else {
         $('#listDistrictTehsil').find('option').remove();
-        $('select').material_select();
+        $('select').formSelect();
         Materialize.toast('No district in this province', 4000)
       }
 
@@ -73,11 +73,11 @@ function getDistrictForUC(val) {
         });
         $('#listDistrictUC').find('option').remove();
         $('#listDistrictUC').append(html);
-        $('select').material_select();
+        $('select').formSelect();
         console.log(html);
       } else {
         $('#listDistrictUC').find('option').remove();
-        $('select').material_select();
+        $('select').formSelect();
         Materialize.toast('No district in this province', 4000)
       }
 
@@ -98,7 +98,7 @@ function addDist (){
         Materialize.toast(data.msg, 3000);
           console.log(data);
           $('#frmAddDist').trigger("reset");
-        $('select').material_select();
+        $('select').formSelect();
       }
   });
 }
@@ -112,7 +112,7 @@ function addTeh (){
         Materialize.toast(data.msg, 3000);
           console.log(data);
           $('#frmAddTehsil').trigger("reset");
-          $('select').material_select();
+          $('select').formSelect();
       }
   });
 }
@@ -126,7 +126,7 @@ function addUC (){
         Materialize.toast(data.msg, 3000);
           console.log(data);
           $('#frmAddUC').trigger("reset");
-          $('select').material_select(); 
+          $('select').formSelect(); 
 
       }
   });
@@ -149,11 +149,11 @@ function getTehsil(val) {
         });
         $('#listTehsil').find('option').remove();
         $('#listTehsil').append(html);
-        $('select').material_select();
+        $('select').formSelect();
         console.log(html);
       } else {
         $('#listTehsil').find('option').remove();
-        $('select').material_select();
+        $('select').formSelect();
         Materialize.toast('No Tehsil in this district', 4000)
       }
 
@@ -178,11 +178,11 @@ function getTehsilForUC(val) {
         });
         $('#listTehsilUC').find('option').remove();
         $('#listTehsilUC').append(html);
-        $('select').material_select();
+        $('select').formSelect();
         console.log(html);
       } else {
         $('#listTehsilUC').find('option').remove();
-        $('select').material_select();
+        $('select').formSelect();
         Materialize.toast('No Tehsil in this district', 4000)
       }
 
@@ -207,11 +207,11 @@ function getUC(val) {
         });
         $('#listUC').find('option').remove();
         $('#listUC').append(html);
-        $('select').material_select();
+        $('select').formSelect();
         console.log(html);
       } else {
         $('#listUC').find('option').remove();
-        $('select').material_select();
+        $('select').formSelect();
         Materialize.toast('No UC in this Tehsil', 4000)
       }
 
